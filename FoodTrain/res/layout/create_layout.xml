@@ -1,71 +1,85 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:orientation="horizontal"
-    android:weightSum="1.0" >
-
-    <Button
-        android:id="@+id/cancelbutton"
-        android:layout_width="wrap_content"
+    android:orientation="vertical"
+    tools:context=".TrainList" >
+	
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="22dp"
-        android:layout_toRightOf="@+id/editText1"
-        android:layout_weight="0.46"
-        android:onClick="CancelClick"
-        android:text="Cancel" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/editText1"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/cancelbutton"
-        android:text="name" />
-
-    <EditText
-        android:id="@+id/namefield"
-        android:layout_width="144dp"
-        android:layout_height="60dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="25dp"
-        android:ems="10" />
-
-    <EditText
-        android:id="@+id/datefield"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/namefield"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/namefield"
-        android:layout_marginTop="64dp"
-        android:ems="10" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_alignTop="@+id/datefield"
-        android:text="date" />
-
-    <Button
-        android:id="@+id/createbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/cancelbutton"
-        android:layout_alignBottom="@+id/cancelbutton"
         android:layout_centerHorizontal="true"
-        android:layout_weight="0.53"
-        android:onClick="CreateClick"
-        android:text="Create" />
+        android:weightSum="1.0" >
 
+        <Button
+            android:id="@+id/createbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Train" 
+            android:layout_weight=".50" />
+        <Button
+            android:id="@+id/cancelbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:layout_weight=".50" />
+    </LinearLayout>
+    
+	<LinearLayout
+	    android:id="@+id/createlayout"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_above="@id/buttons"
+	    android:layout_alignParentTop="true"
+	    android:orientation="vertical" >
+	    
+	    <TextView
+	        android:id="@+id/nameTextView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Train Name:" />
+
+	    <EditText
+	        android:id="@+id/nameEditText"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:hint="Pick a name" >
+	        
+	        <requestFocus />
+		
+		</EditText>
+	    
+	    <TextView
+	        android:id="@+id/dateTextView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Train Date:" />
+	    
+	    <TextView android:id="@+id/myDate"
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content" 
+			android:text="You must pick a date!" />
+
+	    <Button android:id="@+id/myDatePickerButton"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="Choose Date"/>
+
+		
+
+	    <TextView
+	        android:id="@+id/timeTextViw"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Train Time:" />
+
+	    <TimePicker
+	        android:id="@+id/timePicker"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" />
+    
+    </LinearLayout>
 </RelativeLayout>

@@ -1,6 +1,8 @@
 package com.cs1635.tryhards.foodtrain;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -117,11 +119,21 @@ public class TrainScreen extends ListActivity {
 		      if (resultCode == Activity.RESULT_OK) {
 		        // TODO Extract the data returned from the child Activity.
 		    	  //add a new train
-		    	  Intent i = getIntent(); //
 		    	  
-		    	  Train t = new Train();
-		    	  t.setTrainName(i.getStringExtra("name"));
-		    	  t.setTrainStatus(i.getStringExtra("date")); //for the date
+		    	  Calendar cal = Calendar.getInstance();
+		    	  
+					cal.set(Calendar.YEAR, data.getIntExtra("YEAR", 0));
+					cal.set(Calendar.MONTH, data.getIntExtra("MONTH", 0));
+					cal.set(Calendar.DATE, data.getIntExtra("DAY", 0));
+					cal.set(Calendar.HOUR_OF_DAY, data.getIntExtra("HOUR", 0));
+					cal.set(Calendar.MINUTE, data.getIntExtra("MINUTE", 0));
+					cal.set(Calendar.SECOND, 0);
+					cal.set(Calendar.MILLISECOND, 0);
+		    	  
+		    	  Log.w("FoodTrain", "Calendar main screen: " + cal);
+		    	  
+		    	  Train t = new Train(data.getStringExtra("TRAIN-NAME"), cal);
+		    	  //i.getStringExtra("date")
 		    	  m_trains.add(t); //put it on the list of trains
 		    	  runOnUiThread(returnRes); //refresh list of trains
 		      }
@@ -152,12 +164,10 @@ public class TrainScreen extends ListActivity {
                   m_trains.add(o1);
         	}*/
           
-            Train o2 = new Train();
-            o2.setTrainName("SF Advertisement");
-            o2.setTrainStatus("Completed");
-            m_trains.add(o2);
+            //Train o2 = new Train("Test Train", Calendar.getInstance());
+            //m_trains.add(o2);
                Thread.sleep(1000);
-            Log.i("ARRAY", ""+ m_trains.size());
+            //Log.i("ARRAY", ""+ m_trains.size());
           } catch (Exception e) { 
             Log.e("BACKGROUND_PROC", e.getMessage());
           }
@@ -183,6 +193,7 @@ public class TrainScreen extends ListActivity {
         @Override
         public void run() {
             if(m_trains != null && m_trains.size() > 0){
+            	m_adapter.clear();
                 m_adapter.notifyDataSetChanged();
                 for(int i=0;i<m_trains.size();i++)
                 m_adapter.add(m_trains.get(i));
@@ -219,11 +230,16 @@ public class TrainScreen extends ListActivity {
 			if (o != null) {
 				TextView trainname = (TextView) v.findViewById(R.id.trainname);
 				TextView trainday = (TextView) v.findViewById(R.id.trainday);
+				TextView traintime = (TextView) v.findViewById(R.id.traintime);
+				
 				if (trainname != null) {
 					trainname.setText(o.getTrainName());
 			     }
 				if(trainday != null){
-					trainday.setText(o.getTrainStatus());
+					trainday.setText(o.getTrainDay());
+				}
+				if (traintime != null) {
+					traintime.setText(o.getTrainTime());
 				}
 			}
 			
