@@ -22,6 +22,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity 
+            android:name=".CreateScreen">
+            <intent-filter>
+            <action android:name="com.cs1635.tryhards.foodtrain.CreateScreen" />
+            </intent-filter>
+            </activity>
+        
+         <activity 
+            android:name=".GroupScreen">
+            <intent-filter>
+            <action android:name="com.cs1635.tryhards.foodtrain.GroupScreen" />
+            </intent-filter>
+            </activity>
+        
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package com.cs1635.tryhards.foodtrain;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -23,6 +24,10 @@ public class TrainScreen extends ListActivity {
     private ArrayList<Train> m_trains = null;
     private TrainAdapter m_adapter;
     private Runnable viewTrains;
+    
+    final int CREATE_ACTIVITY = 0; //a way to identify activities
+    //for switch statements
+    final int GROUP_ACTIVITY = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +82,13 @@ public class TrainScreen extends ListActivity {
 		// TODO: Call some other activity or something :)
 		// Need to create a train
 		// Intent resultIntent;
-		Log.i("TrainScreen", "Create button clicked!");
+		//Log.i("TrainScreen", "Create button clicked!");
+		Intent createintent = new Intent(this, CreateScreen.class);
+		//i'm using startActivityForResult so we can get data back, such as name,
+		//choices, date, etc.
+		startActivityForResult(createintent, CREATE_ACTIVITY);
 		
-		Toast.makeText(TrainScreen.this, "You clicked the Create Train button!",Toast.LENGTH_SHORT).show();
+		//Toast.makeText(TrainScreen.this, "You clicked the Create Train button!",Toast.LENGTH_SHORT).show();
 	}
 	
 	/**
@@ -91,10 +100,40 @@ public class TrainScreen extends ListActivity {
 		// TODO: Call some other activity or something :)
 		// Need to pull up the groups activity
 		// Intent resultIntent;
-		Log.i("TrainScreen", "Groups button clicked!");
+		//Log.i("TrainScreen", "Groups button clicked!");
+		Intent groupintent = new Intent(this, GroupScreen.class);
+		startActivity(groupintent);
 		
-		Toast.makeText(TrainScreen.this, "You clicked the Groups button!",Toast.LENGTH_SHORT).show();
+		//Toast.makeText(TrainScreen.this, "You clicked the Groups button!",Toast.LENGTH_SHORT).show();
 	}
+	
+	//this is where you handle the results
+	//from the create activity
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		  super.onActivityResult(requestCode, resultCode, data);
+		  switch(requestCode) {
+		    case (CREATE_ACTIVITY): {//for create button
+		    	//clicked Create to make a new train
+		      if (resultCode == Activity.RESULT_OK) {
+		        // TODO Extract the data returned from the child Activity.
+		    	  //add a new train
+		    	  Intent i = getIntent(); //
+		    	  
+		    	  Train t = new Train();
+		    	  t.setTrainName(i.getStringExtra("name"));
+		    	  t.setTrainStatus(i.getStringExtra("date")); //for the date
+		    	  m_trains.add(t); //put it on the list of trains
+		    	  runOnUiThread(returnRes); //refresh list of trains
+		      }
+		      //or they clicked Cancel to not make the train
+		      else if (resultCode == Activity.RESULT_CANCELED)
+		      {
+		    	  
+		      }
+		      break;
+		    } 
+		  }
+		}
 	
 	/**
 	 * This is just a temporary method to load some fake trains so we can see what they look like :)
@@ -104,12 +143,14 @@ public class TrainScreen extends ListActivity {
         try{
         	m_trains = new ArrayList<Train>();
         	
-        	for (int i = 0;i < 20;i++) {
+        	//we know it can display trains,
+        	//so I temporarily disabled this
+        	/*for (int i = 0;i < 5;i++) { //decided to change it from 20 to 5
         		Train o1 = new Train();
         		  o1.setTrainName("Train number " + i);
                   o1.setTrainStatus("Date" + i);
                   m_trains.add(o1);
-        	}
+        	}*/
           
             Train o2 = new Train();
             o2.setTrainName("SF Advertisement");
