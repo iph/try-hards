@@ -23,6 +23,7 @@ import android.widget.Toast;
 public class TrainScreen extends ListActivity {
 	
 	private ProgressDialog m_ProgressDialog = null; 
+
     private ArrayList<Train> m_trains = null;
     private TrainAdapter m_adapter;
     private Runnable viewTrains;
@@ -126,10 +127,12 @@ public class TrainScreen extends ListActivity {
 	//from the create activity
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		  super.onActivityResult(requestCode, resultCode, data);
-		  switch(requestCode) {
+		  switch(requestCode) 
+		  {
 		    case (CREATE_ACTIVITY): {//for create button
 		    	//clicked Create to make a new train
-		      if (resultCode == Activity.RESULT_OK) {
+		      if (resultCode == Activity.RESULT_OK) 
+		     	 {
 		        // TODO Extract the data returned from the child Activity.
 		    	  //add a new train
 		    	  
@@ -149,14 +152,19 @@ public class TrainScreen extends ListActivity {
 		    	  //i.getStringExtra("date")
 		    	  m_trains.add(t); //put it on the list of trains
 		    	  runOnUiThread(returnRes); //refresh list of trains
-		      }
+		      	}
 		      //or they clicked Cancel to not make the train
-		      else if (resultCode == Activity.RESULT_CANCELED)
-		      {
-		    	  
-		      }
-		      break;
-		    } 
+		    }
+		    case(TRAIN_DETAILED_ACTIVITY)
+		    {
+		    	if(resultCode == Activity.RESULT_OK)
+		    	{
+		    		m_trains.remove(t);
+		    		runOnUiThread(returnRes);
+		    	}
+		    	
+		    }
+
 		  }
 		}
 	
