@@ -23,6 +23,7 @@ import android.widget.Toast;
 public class TrainScreen extends ListActivity {
 	
 	private ProgressDialog m_ProgressDialog = null; 
+
     private ArrayList<Train> m_trains = null;
     private TrainAdapter m_adapter;
     private Runnable viewTrains;
@@ -31,6 +32,7 @@ public class TrainScreen extends ListActivity {
     //for switch statements
     final int GROUP_ACTIVITY = 1;
     final int TRAIN_DETAILED_ACTIVITY = 2;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +87,7 @@ public class TrainScreen extends ListActivity {
 		detailIntent.putExtra("position", position);
 		detailIntent.putExtra("creator", train.isCreator());
 		startActivityForResult(detailIntent, TRAIN_DETAILED_ACTIVITY);
-		
+	
 	}
 	
 	/**
@@ -127,10 +129,12 @@ public class TrainScreen extends ListActivity {
 	//from the create activity
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		  super.onActivityResult(requestCode, resultCode, data);
-		  switch(requestCode) {
+		  switch(requestCode) 
+		  {
 		    case (CREATE_ACTIVITY): {//for create button
 		    	//clicked Create to make a new train
-		      if (resultCode == Activity.RESULT_OK) {
+		      if (resultCode == Activity.RESULT_OK) 
+		     	 {
 		        // TODO Extract the data returned from the child Activity.
 		    	  //add a new train
 		    	  
@@ -150,7 +154,7 @@ public class TrainScreen extends ListActivity {
 		    	  //i.getStringExtra("date")
 		    	  m_trains.add(t); //put it on the list of trains
 		    	  runOnUiThread(returnRes); //refresh list of trains
-		      }
+		      	}
 		      //or they clicked Cancel to not make the train
 		      else if (resultCode == Activity.RESULT_CANCELED)
 		      {
@@ -166,6 +170,7 @@ public class TrainScreen extends ListActivity {
 		    	}
 		    	break;
 		    }
+
 		  }
 		}
 	
@@ -187,7 +192,7 @@ public class TrainScreen extends ListActivity {
         	//we know it can display trains,
         	//so I temporarily disabled this
         
-	    for (int i = 0;i < 3;i++) { //decided to change it from 20 to 5
+	    for (int i = 0;i < 1;i++) { //decided to change it from 20 to 5
         		  Train o1 = new Train("Test", cal);
                   m_trains.add(o1);
         	}

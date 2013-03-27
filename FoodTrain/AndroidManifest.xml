@@ -40,12 +40,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cs1635.tryhards.foodtrain.TrainScreen" />
         </activity>
-        <activity
-            android:name="com.cs1635.tryhards.foodtrain.FullscreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_fullscreen"
-            android:theme="@style/FullscreenTheme" >
-        </activity>
+
     </application>
 
 </manifest>
