@@ -49,7 +49,6 @@ public class TrainScreen extends ListActivity {
             	getTrains();
             }
         };
-        
         // Run the runnable :)
         Thread thread =  new Thread(null, viewTrains, "MagentoBackground");
         thread.start();
@@ -82,7 +81,9 @@ public class TrainScreen extends ListActivity {
 		Train train = this.m_trains.get(position);
 		detailIntent.putExtra("name", train.getTrainName());
 		detailIntent.putExtra("date", train.getTrainDay());
-		//detailIntent.putExtra("", value)
+		detailIntent.putExtra("time", train.getTrainTime());
+		detailIntent.putExtra("position", position);
+		detailIntent.putExtra("creator", train.isCreator());
 		startActivityForResult(detailIntent, TRAIN_DETAILED_ACTIVITY);
 		
 	}
@@ -145,7 +146,7 @@ public class TrainScreen extends ListActivity {
 		    	  
 		    	  Log.w("FoodTrain", "Calendar main screen: " + cal);
 		    	  
-		    	  Train t = new Train(data.getStringExtra("TRAIN-NAME"), cal);
+		    	  Train t = new Train(data.getStringExtra("TRAIN-NAME"), cal, true);
 		    	  //i.getStringExtra("date")
 		    	  m_trains.add(t); //put it on the list of trains
 		    	  runOnUiThread(returnRes); //refresh list of trains
@@ -157,6 +158,14 @@ public class TrainScreen extends ListActivity {
 		      }
 		      break;
 		    } 
+		    case(TRAIN_DETAILED_ACTIVITY):{
+		    	if (resultCode == Activity.RESULT_OK){
+		    		m_trains.remove(data.getExtras().getInt("position"));
+			    	runOnUiThread(returnRes); //refresh list of trains
+
+		    	}
+		    	break;
+		    }
 		  }
 		}
 	
@@ -167,18 +176,22 @@ public class TrainScreen extends ListActivity {
 	private void getTrains() {
         try{
         	m_trains = new ArrayList<Train>();
-        	
+	    	  Calendar cal = Calendar.getInstance();
+				cal.set(Calendar.YEAR, 0);
+				cal.set(Calendar.MONTH, 0);
+				cal.set(Calendar.DATE, 0);
+				cal.set(Calendar.HOUR_OF_DAY, 0);
+				cal.set(Calendar.MINUTE, 0);
+				cal.set(Calendar.SECOND, 0);
+				cal.set(Calendar.MILLISECOND, 0);
         	//we know it can display trains,
         	//so I temporarily disabled this
-        	/*for (int i = 0;i < 5;i++) { //decided to change it from 20 to 5
-        		Train o1 = new Train();
-        		  o1.setTrainName("Train number " + i);
-                  o1.setTrainStatus("Date" + i);
+        
+	    for (int i = 0;i < 3;i++) { //decided to change it from 20 to 5
+        		  Train o1 = new Train("Test", cal);
                   m_trains.add(o1);
-        	}*/
-          
-            //Train o2 = new Train("Test Train", Calendar.getInstance());
-            //m_trains.add(o2);
+        	}
+        	
                Thread.sleep(1000);
             //Log.i("ARRAY", ""+ m_trains.size());
           } catch (Exception e) { 
@@ -205,7 +218,7 @@ public class TrainScreen extends ListActivity {
 
         @Override
         public void run() {
-            if(m_trains != null && m_trains.size() > 0){
+            if(m_trains != null && m_trains.size() >= 0){
             	m_adapter.clear();
                 m_adapter.notifyDataSetChanged();
                 for(int i=0;i<m_trains.size();i++)
@@ -236,7 +249,12 @@ public class TrainScreen extends ListActivity {
 			View v = convertView;
 			if (v == null) {
 				LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				v = vi.inflate(R.layout.row, null);
+				if(trains.get(position).isCreator()){
+					v = vi.inflate(R.layout.row_mine, null);
+				}
+				else{
+					v = vi.inflate(R.layout.row, null);
+				}
 			}
 			
 			Train o = trains.get(position);

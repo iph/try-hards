@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 
@@ -14,12 +16,40 @@ public class DetailedTrain extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detailed_train);
-		 Intent sender=getIntent();
-		 String trainName = sender.getExtras().getString("name");
-		 final TextView name = (TextView)findViewById(R.id.train_name);
-		 name.setText(trainName);
+		setState();
 	}
 
+	public void setState(){
+		 Intent sender=getIntent();
+		 String trainName = sender.getExtras().getString("name");
+		 String trainDate = sender.getExtras().getString("date");
+		 String trainTime = sender.getExtras().getString("time");
+		 boolean isCreator = sender.getExtras().getBoolean("creator", true);
+		 final TextView name = (TextView)findViewById(R.id.train_name);
+		 final TextView date = (TextView)findViewById(R.id.TextView02);
+		 final TextView time = (TextView)findViewById(R.id.TextView03);
+
+		 date.setText("Day: " + trainDate);
+		 time.setText("Time: " + trainTime);
+		 name.setText(trainName);
+		 
+		findViewById(R.id.decline).setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				DeclineClick();
+			}
+		});
+
+		if(isCreator){
+			final Button herp = (Button)findViewById(R.id.decline);
+			herp.setText("Delete");
+		}
+		findViewById(R.id.button1).setOnClickListener(new View.OnClickListener(){
+			public void onClick(View v) {
+				CancelClick();
+			}
+		});
+		
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -42,6 +72,23 @@ public class DetailedTrain extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public void DeclineClick()
+	{
+		Intent resultIntent = new Intent();
+		
+		resultIntent.putExtra("position", getIntent().getExtras().getInt("position"));
+		setResult(Activity.RESULT_OK, resultIntent);
+		finish();
+	}
+	
+	public void CancelClick()
+	{
+		Intent resultIntent = new Intent();
+		// TODO Add extras or a data URI to this intent as appropriate.
+		setResult(Activity.RESULT_CANCELED, resultIntent);
+		finish();
 	}
 
 }

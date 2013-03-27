@@ -12,11 +12,19 @@ public class Train {
 	private String trainName;
 	private String trainStatus;
 	private Calendar trainDate;
+	private boolean isCreator;
+	
 	
 	public Train (String name, Calendar date) {
 		trainName = name;
 		Log.w("FoodTrain", "Calendar: " + date);
 		trainDate = date;
+		isCreator = false;
+	}
+	
+	public Train(String name, Calendar date, boolean creator){
+		this(name, date);
+		isCreator = true;
 	}
 	
 	public Calendar getTrainDate() {
@@ -48,6 +56,10 @@ public class Train {
     }
     public void setTrainStatus(String trainStatus) {
         this.trainStatus = trainStatus;
+    }
+    
+    public boolean isCreator(){
+    	return isCreator;
     }
     
 }
