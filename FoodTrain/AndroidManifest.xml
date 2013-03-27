@@ -31,6 +31,7 @@
             <intent-filter>
                 <action android:name="com.cs1635.tryhards.foodtrain.GroupScreen" />
             </intent-filter>
+<<<<<<< HEAD
         </activity>
         <activity
             android:name="com.cs1635.tryhards.foodtrain.DetailedTrain"
@@ -40,6 +41,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cs1635.tryhards.foodtrain.TrainScreen" />
         </activity>
+=======
+            </activity>
+         <activity android:name=".ViewTrain"></activity>
+         <activity android:name=".ReviewTrain"></activity>
+        
+>>>>>>> Tried adding new activities
     </application>
 
 </manifest>

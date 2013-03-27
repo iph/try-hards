@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <Button
+        android:id="@+id/goingbutton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="14dp"
+        android:layout_marginLeft="18dp"
+        android:text="Going" />
+
+    <Button
+        android:id="@+id/rejectbutton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/goingbutton"
+        android:layout_alignBottom="@+id/goingbutton"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="19dp"
+        android:text="Reject" />
+
+    <TextView
+        android:id="@+id/notgoingtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/rejectbutton"
+        android:layout_marginTop="152dp"
+        android:text="Not Going"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/goingtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/notgoingtext"
+        android:layout_alignBottom="@+id/notgoingtext"
+        android:layout_alignLeft="@+id/goingbutton"
+        android:text="Going"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/goingtext"
+        android:layout_below="@+id/goingtext" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/trainname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="22dp"
+        android:text="Train Name"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>

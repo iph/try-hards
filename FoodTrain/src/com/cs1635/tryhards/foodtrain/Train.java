@@ -12,6 +12,7 @@ public class Train {
 	private String trainName;
 	private String trainStatus;
 	private Calendar trainDate;
+	private int going; //0 if unknown (just invited), 1 if going, 2 if declining
 	
 	public Train (String name, Calendar date) {
 		trainName = name;
