@@ -30,6 +30,7 @@ public class TrainScreen extends ListActivity {
     final int CREATE_ACTIVITY = 0; //a way to identify activities
     //for switch statements
     final int GROUP_ACTIVITY = 1;
+    final int TRAIN_DETAILED_ACTIVITY = 2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +71,20 @@ public class TrainScreen extends ListActivity {
 		// TODO: Make it so this opens a new activity for dealing with Trains
 		
 		Log.w("TrainScreen", "List clicked!");
+		/*
 		Toast.makeText(getApplicationContext(),
 				"Click Train Number " + position, Toast.LENGTH_SHORT)
 				.show();
+		*/
+		Intent detailIntent = new Intent(this, DetailedTrain.class);
+		//i'm using startActivityForResult so we can get data back, such as name,
+		//choices, date, etc.
+		Train train = this.m_trains.get(position);
+		detailIntent.putExtra("name", train.getTrainName());
+		detailIntent.putExtra("date", train.getTrainDay());
+		//detailIntent.putExtra("", value)
+		startActivityForResult(detailIntent, TRAIN_DETAILED_ACTIVITY);
+		
 	}
 	
 	/**
@@ -92,6 +104,7 @@ public class TrainScreen extends ListActivity {
 		
 		//Toast.makeText(TrainScreen.this, "You clicked the Create Train button!",Toast.LENGTH_SHORT).show();
 	}
+	
 	
 	/**
 	 * This handles when the Groups button is clicked.

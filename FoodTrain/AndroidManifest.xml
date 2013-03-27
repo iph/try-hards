@@ -22,21 +22,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        <activity 
-            android:name=".CreateScreen">
+        <activity android:name="com.cs1635.tryhards.foodtrain.CreateScreen" >
             <intent-filter>
-            <action android:name="com.cs1635.tryhards.foodtrain.CreateScreen" />
+                <action android:name="com.cs1635.tryhards.foodtrain.CreateScreen" />
             </intent-filter>
-            </activity>
-        
-         <activity 
-            android:name=".GroupScreen">
+        </activity>
+        <activity android:name="com.cs1635.tryhards.foodtrain.GroupScreen" >
             <intent-filter>
-            <action android:name="com.cs1635.tryhards.foodtrain.GroupScreen" />
+                <action android:name="com.cs1635.tryhards.foodtrain.GroupScreen" />
             </intent-filter>
-            </activity>
-        
+        </activity>
+        <activity
+            android:name="com.cs1635.tryhards.foodtrain.DetailedTrain"
+            android:label="@string/title_activity_detailed_train"
+            android:parentActivityName="com.cs1635.tryhards.foodtrain.TrainScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cs1635.tryhards.foodtrain.TrainScreen" />
+        </activity>
     </application>
 
 </manifest>
