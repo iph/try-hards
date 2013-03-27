@@ -31,12 +31,12 @@ public class TrainScreen extends ListActivity {
     final int CREATE_ACTIVITY = 0; //a way to identify activities
     //for switch statements
     final int GROUP_ACTIVITY = 1;
-<<<<<<< HEAD
+<//<<<<<< HEAD
     final int TRAIN_DETAILED_ACTIVITY = 2;
-=======
+=//======
     final int VIEW_ACTIVITY = 2;
     final int REVIEW_ACTIVITY = 3;
->>>>>>> Tried adding new activities
+>//>>>>>> Tried adding new activities
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,11 +92,11 @@ public class TrainScreen extends ListActivity {
 		//detailIntent.putExtra("", value)
 		startActivityForResult(detailIntent, TRAIN_DETAILED_ACTIVITY);
 		
-=======
+/*=======
 		//for now, just review trains you've made
 		Intent reviewintent = new Intent(this, ReviewTrain.class);
 		startActivityForResult(reviewintent, REVIEW_ACTIVITY);
->>>>>>> Tried adding new activities
+>>>>>>> Tried adding new activities*/
 	}
 	
 	/**
