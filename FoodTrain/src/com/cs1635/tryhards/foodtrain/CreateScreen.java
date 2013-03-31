@@ -2,6 +2,7 @@ package com.cs1635.tryhards.foodtrain;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -20,15 +21,17 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 public class CreateScreen extends FragmentActivity{
-	
-	
 	EditText nameField;
 	EditText dateField;
+	EditText locationField;
 	TimePicker timeField;
+	TextView locationList;
 	
 	private int returnYear;
 	private int returnMonth;
 	private int returnDay;
+	
+	private ArrayList<String> locations;
 
 	private TextView mDateDisplay;
 
@@ -42,6 +45,8 @@ public class CreateScreen extends FragmentActivity{
 		//dateField = (EditText) findViewById(R.id.dateEditText);
 		timeField = (TimePicker) findViewById(R.id.timePicker);
 		mDateDisplay = (TextView) findViewById(R.id.myDate);
+		locationField = (EditText) findViewById(R.id.locationEditText);
+		locationList = (TextView) findViewById(R.id.locationsList);
 		
 		//make the listeners for the cancel and click buttons
 		findViewById(R.id.cancelbutton).setOnClickListener(new View.OnClickListener() {
@@ -61,6 +66,12 @@ public class CreateScreen extends FragmentActivity{
 	        	showDatePicker();
 	        }
 	    });
+		
+		findViewById(R.id.addLocationButton).setOnClickListener(new View.OnClickListener() {
+	        public void onClick(View v) {
+	        	addLocationClick();
+	        }
+	    });
 
 	    // Set to the current date so if the user doesn't choose it, it doesn't error :)
 	    final Calendar c = Calendar.getInstance();
@@ -68,6 +79,7 @@ public class CreateScreen extends FragmentActivity{
 	    returnMonth = c.get(Calendar.MONTH);
 	    returnDay = c.get(Calendar.DAY_OF_MONTH);
 	    
+	    locations = new ArrayList<String>();
 	}
 		    
 		    
@@ -103,20 +115,50 @@ public class CreateScreen extends FragmentActivity{
 	};
 
 	
+	public void addLocationClick() {
+		String location = locationField.getText().toString();
+		
+		if ((location == null) || (location.equals(""))) {
+			// If there is nothing entered, toast!
+			Toast.makeText(CreateScreen.this,"Enter a location!", Toast.LENGTH_SHORT).show();
+		}
+		else if (locations.contains(location)) {
+			// If this location is already in the list, toast!
+			Toast.makeText(CreateScreen.this,"Already in the list!", Toast.LENGTH_SHORT).show();
+		}
+		else {
+			// Add the location to the list
+			locations.add(location);
+			String original = locationList.getText().toString();
+			original += ("\n" + location);
+			Log.i("FoodTrain", location);
+			locationList.setText(original);
+		}
+		
+	}
+	
 	public void CreateClick()
 	{
-		Intent resultIntent = new Intent();
 		
-		resultIntent.putExtra("TRAIN-NAME", nameField.getText().toString());
-		resultIntent.putExtra("YEAR", returnYear);
-		resultIntent.putExtra("MONTH", returnMonth);
-		resultIntent.putExtra("DAY", returnDay);
-		resultIntent.putExtra("HOUR", timeField.getCurrentHour());
-		resultIntent.putExtra("MINUTE", timeField.getCurrentMinute());
-		
-		setResult(Activity.RESULT_OK, resultIntent);
-
-		finish();
+		if (locations.size() < 1) {
+			// If this location is already in the list, toast!
+			Toast.makeText(CreateScreen.this,"Add at least one location!", Toast.LENGTH_SHORT).show();
+		}
+		else {
+			Intent resultIntent = new Intent();
+			
+			resultIntent.putExtra("TRAIN-NAME", nameField.getText().toString());
+			resultIntent.putExtra("YEAR", returnYear);
+			resultIntent.putExtra("MONTH", returnMonth);
+			resultIntent.putExtra("DAY", returnDay);
+			resultIntent.putExtra("HOUR", timeField.getCurrentHour());
+			resultIntent.putExtra("MINUTE", timeField.getCurrentMinute());
+			resultIntent.putStringArrayListExtra("LOCATIONS", locations);
+			
+			setResult(Activity.RESULT_OK, resultIntent);
+			
+			finish();
+		}
 	}
 	
 	public void CancelClick()

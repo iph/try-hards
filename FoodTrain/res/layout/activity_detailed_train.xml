@@ -3,190 +3,302 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DetailedTrain" >
-
-    <TextView
-        android:id="@+id/train_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:background="#33B5E5"
-        android:padding="5dp"
-        android:text="@string/hello_world"
-        android:textColor="#2F2B26"
-        android:textSize="30dp" />
-
-    <View
-        android:id="@+id/separator"
-        android:layout_width="fill_parent"
-        android:layout_height="3dp"
-        android:layout_above="@+id/TextView01"
-        android:layout_alignParentLeft="true"
-        android:background="#0099CC"
-        android:visibility="visible" />
-
-    <TextView
-        android:id="@+id/TextView01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/train_name"
-        android:layout_marginTop="16dp"
-        android:padding="3dp"
-        android:paddingLeft="3dp"
-        android:text="Where: "
-        android:textSize="20dp"
-        android:typeface="serif" />
-
-    <TextView
-        android:id="@+id/TextView02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/TextView01"
-        android:padding="3dp"
-        android:text="Day:"
-        android:textSize="20dp"
-        android:typeface="serif" />
-
-    <TextView
-        android:id="@+id/TextView03"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/TextView02"
-        android:padding="3dp"
-        android:text="Time:"
-        android:textSize="20dp"
-        android:typeface="serif" />
-
-    <View
-        android:id="@+id/View01"
-        android:layout_width="fill_parent"
-        android:layout_height="3dp"
-        android:layout_above="@+id/linearLayout1"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/TextView03"
-        android:layout_marginTop="50dp"
-        android:background="#0099CC"
-        android:visibility="visible" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/View01" >
-
-        <ScrollView
-            android:id="@+id/scrollView1"
-            android:layout_width="wrap_content"
-            android:layout_height="252dp"
-            android:layout_weight="2.60"
-            android:scrollbarDefaultDelayBeforeFade="500000"
-            android:scrollbarFadeDuration="0" >
-
-            <LinearLayout
-                android:layout_width="142dp"
-                android:layout_height="236dp"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/TextView14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sean" />
-            </LinearLayout>
-        </ScrollView>
-
-        <View
-            android:id="@+id/separator2"
-            android:layout_width="3dp"
-            android:layout_height="900dp"
-            android:background="#0099CC"
-            android:visibility="visible" />
-
-        <ScrollView
-            android:id="@+id/scrollView2"
-            android:layout_width="wrap_content"
-            android:layout_height="240dp"
-            android:layout_weight="16.50"
-            android:scrollbarDefaultDelayBeforeFade="500000"
-            android:scrollbarFadeDuration="0" >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical" >
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
-
+    
     <LinearLayout
         android:id="@+id/button_holder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_weight="0.27" >
+        android:layout_alignParentRight="true" >
 
         <Button
-            android:id="@+id/decline"
-            android:layout_width="167dp"
+            android:id="@+id/declineButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="0.5"
             android:text="Decline" />
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/backButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.91"
+            android:layout_weight="0.5"
             android:text="Back" />
+
     </LinearLayout>
-
+   
+    <TextView
+	        android:id="@+id/train_name"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignParentTop="true"
+	        android:background="#33B5E5"
+	        android:padding="5dp"
+	        android:text="@string/hello_world"
+	        android:textColor="#2F2B26"
+	        android:textSize="30dp" />
+    
     <View
-        android:id="@+id/View02"
+        android:id="@+id/separator"
         android:layout_width="fill_parent"
         android:layout_height="3dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/TextView03"
-        android:layout_marginTop="15dp"
-        android:background="#0099CC"
-        android:visibility="visible" />
-
-    <TextView
-        android:id="@+id/TextView04"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/View02"
-        android:padding="5dp"
-        android:paddingLeft="3dp"
-        android:text="Going "
-        android:textSize="20dp"
-        android:typeface="sans" />
-
-    <TextView
-        android:id="@+id/TextView05"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/View01"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="3dp"
-        android:layout_marginRight="50dp"
-        android:padding="3dp"
-        android:paddingLeft="3dp"
-        android:text="Not Going"
-        android:textSize="20dp"
-        android:typeface="sans" />
-
-    <View
-        android:id="@+id/View03"
-        android:layout_width="fill_parent"
-        android:layout_height="3dp"
-        android:layout_above="@id/button_holder"
+        android:layout_below="@+id/train_name"
         android:layout_alignParentLeft="true"
         android:background="#0099CC"
         android:visibility="visible" />
+    
+    <ScrollView
+		android:id="@+id/scroller"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_above="@id/button_holder"
+		android:layout_alignTop="@id/separator"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentRight="true"
+		android:orientation="vertical" 
+		android:fadeScrollbars="false" >
+		
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+		        android:id="@+id/whereTrainTextView"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="16dp"
+		        android:layout_alignParentTop="true"
+		        android:padding="3dp"
+		        android:paddingLeft="3dp"
+		        android:text="Where: "
+		        android:textSize="20dp"
+		        android:typeface="serif" />
+		
+		    <TextView
+		        android:id="@+id/dayTrainTextView"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/whereTrainTextView"
+		        android:padding="3dp"
+		        android:text="Day:"
+		        android:textSize="20dp"
+		        android:typeface="serif" />
+		
+		    <TextView
+		        android:id="@+id/timeTrainTextView"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/dayTrainTextView"
+		        android:padding="3dp"
+		        android:text="Time:"
+		        android:textSize="20dp"
+		        android:typeface="serif" />
+		    
+		    <View
+		        android:id="@+id/separator6"
+		        android:layout_width="fill_parent"
+		        android:layout_height="3dp"
+		        android:layout_below="@+id/timeTrainTextView"
+		        android:layout_alignParentLeft="true"
+		        android:background="#0099CC"
+		        android:visibility="visible" />
+		    
+		    <TextView
+		        android:id="@+id/locationTrainTextView"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/separator6"
+		        android:padding="3dp"
+		        android:text="Location(s):"
+		        android:textSize="20dp"
+		        android:typeface="serif" />
+		    
+		    <LinearLayout
+                android:id="@+id/locationsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/locationTrainTextView"
+                android:layout_alignParentLeft="true"
+                android:padding="5dp"
+                android:minHeight="100dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/TextView20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="30dp"
+                    android:text="Qdoba" />
+                <TextView
+                    android:id="@+id/TextView21"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="30dp"
+                    android:text="Mad Mex" />
+                <TextView
+                    android:id="@+id/TextView22"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="30dp"
+                    android:text="Chipotle" />
+
+            </LinearLayout>
+		    
+		    
+		    <View
+		        android:id="@+id/separator2"
+		        android:layout_width="fill_parent"
+		        android:layout_height="3dp"
+		        android:layout_below="@+id/locationsLayout"
+		        android:layout_alignParentLeft="true"
+		        android:background="#0099CC"
+		        android:visibility="visible" />
+		    
+		    <TextView
+		        android:id="@+id/goingTextView"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/separator2"
+		        android:layout_alignParentLeft="true"
+		        android:paddingTop="5dp"
+		        android:paddingRight="5dp"
+		        android:paddingBottom="5dp"
+		        android:paddingLeft="20dp"
+		        android:text="Going"
+		        android:textSize="20dp"
+		        android:typeface="sans" />
+		
+		    <TextView
+		        android:id="@+id/notgoingTextView"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/separator2"
+				android:layout_alignParentRight="true" 
+		        android:paddingTop="5dp"
+		        android:paddingLeft="5dp"
+		        android:paddingBottom="5dp"
+		        android:paddingRight="20dp"
+		        android:text="Not Going"
+		        android:textSize="20dp"
+		        android:typeface="sans" />
+		    
+		    <View
+		        android:id="@+id/separator3"
+		        android:layout_width="match_parent"
+		        android:layout_height="3dp"
+		        android:layout_below="@+id/goingTextView"
+		        android:layout_alignParentLeft="true"
+		        android:background="#0099CC"
+		        android:visibility="visible" />
+	
+		    <LinearLayout
+		        android:id="@+id/listsLayout"
+		        android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentRight="true"
+				android:layout_below="@+id/separator3"
+		        >
+		        
+		        <LinearLayout
+	                android:id="@+id/goingLayout"
+	                android:layout_width="0dp"
+	                android:padding="5dp"
+	                android:layout_height="wrap_content"
+	                android:minHeight="100dp"
+	                android:orientation="vertical" 
+	                android:layout_weight="1" >
+	
+	                <TextView
+	                    android:id="@+id/TextView14"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:text="Sean" />
+	                
+	                <TextView
+	                    android:id="@+id/TextView31"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:text="John" />
+	                
+	                <TextView
+	                    android:id="@+id/TextView32"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:text="Jake" />
+	                
+	                <TextView
+	                    android:id="@+id/TextView33"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:text="Dean" />
+	                
+	                <TextView
+	                    android:id="@+id/TextView34"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:text="Caroline" />
+	                
+	                <TextView
+	                    android:id="@+id/TextView35"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:text="Amber" />
+	                
+	                <TextView
+	                    android:id="@+id/TextView36"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:text="David" />
+	                
+	                <TextView
+	                    android:id="@+id/TextView37"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:text="Kate" />
+	                
+
+	            </LinearLayout>
+	            
+		        <View
+	                android:id="@+id/separator4"
+	                android:layout_width="3dp"
+	                android:layout_height="match_parent"
+	                android:background="#0099CC"
+	                android:visibility="visible"
+	                 />
+	            
+	            <LinearLayout
+	                android:id="@+id/notgoingLayout"
+	                android:layout_width="0dp"
+	                android:padding="5dp"
+	                android:layout_height="wrap_content"
+	                android:minHeight="100dp"
+	                android:orientation="vertical"
+	                android:layout_weight="1" >
+	
+	                <TextView
+	                    android:id="@+id/TextView15"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:text="Matt" />
+	            </LinearLayout>
+		    </LinearLayout>
+		    
+		    <View
+		        android:id="@+id/separator5"
+		        android:layout_width="match_parent"
+		        android:layout_height="3dp"
+		        android:layout_below="@+id/listsLayout"
+		        android:layout_alignParentLeft="true"
+		        android:background="#0099CC"
+		        android:visibility="visible" />
+	            
+		    
+        </RelativeLayout>
+	</ScrollView>
 
 </RelativeLayout>

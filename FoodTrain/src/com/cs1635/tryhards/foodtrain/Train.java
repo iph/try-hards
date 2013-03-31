@@ -1,6 +1,7 @@
 package com.cs1635.tryhards.foodtrain;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -13,6 +14,7 @@ public class Train {
 	private String trainStatus;
 	private Calendar trainDate;
 	private boolean isCreator;
+	private ArrayList<String> locations;
 	
 	
 	public Train (String name, Calendar date) {
@@ -56,6 +58,14 @@ public class Train {
     }
     public void setTrainStatus(String trainStatus) {
         this.trainStatus = trainStatus;
+    }
+    
+    public void setTrainLocations(ArrayList<String> locations) {
+    	this.locations = locations;
+    }
+    
+    public ArrayList<String> getTrainLocations() {
+    	return locations;
     }
     
     public boolean isCreator(){

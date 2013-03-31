@@ -26,24 +26,24 @@ public class DetailedTrain extends Activity {
 		 String trainTime = sender.getExtras().getString("time");
 		 boolean isCreator = sender.getExtras().getBoolean("creator", true);
 		 final TextView name = (TextView)findViewById(R.id.train_name);
-		 final TextView date = (TextView)findViewById(R.id.TextView02);
-		 final TextView time = (TextView)findViewById(R.id.TextView03);
+		 final TextView date = (TextView)findViewById(R.id.dayTrainTextView);
+		 final TextView time = (TextView)findViewById(R.id.timeTrainTextView);
 
 		 date.setText("Day: " + trainDate);
 		 time.setText("Time: " + trainTime);
 		 name.setText(trainName);
 		 
-		findViewById(R.id.decline).setOnClickListener(new View.OnClickListener() {
+		findViewById(R.id.declineButton).setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				DeclineClick();
 			}
 		});
 
 		if(isCreator){
-			final Button herp = (Button)findViewById(R.id.decline);
+			final Button herp = (Button)findViewById(R.id.declineButton);
 			herp.setText("Delete");
 		}
-		findViewById(R.id.button1).setOnClickListener(new View.OnClickListener(){
+		findViewById(R.id.backButton).setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v) {
 				CancelClick();
 			}

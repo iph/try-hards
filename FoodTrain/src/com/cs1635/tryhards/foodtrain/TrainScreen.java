@@ -151,6 +151,7 @@ public class TrainScreen extends ListActivity {
 		    	  Log.w("FoodTrain", "Calendar main screen: " + cal);
 		    	  
 		    	  Train t = new Train(data.getStringExtra("TRAIN-NAME"), cal, true);
+		    	  t.setTrainLocations(data.getStringArrayListExtra("LOCATIONS"));
 		    	  //i.getStringExtra("date")
 		    	  m_trains.add(t); //put it on the list of trains
 		    	  runOnUiThread(returnRes); //refresh list of trains
