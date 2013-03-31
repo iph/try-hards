@@ -84,6 +84,7 @@ public class TrainScreen extends ListActivity {
 		detailIntent.putExtra("name", train.getTrainName());
 		detailIntent.putExtra("date", train.getTrainDay());
 		detailIntent.putExtra("time", train.getTrainTime());
+		detailIntent.putStringArrayListExtra("LOCATIONS", train.getTrainLocations());
 		detailIntent.putExtra("position", position);
 		detailIntent.putExtra("creator", train.isCreator());
 		startActivityForResult(detailIntent, TRAIN_DETAILED_ACTIVITY);
@@ -195,6 +196,12 @@ public class TrainScreen extends ListActivity {
         
 	    for (int i = 0;i < 1;i++) { //decided to change it from 20 to 5
         		  Train o1 = new Train("Test", cal);
+        		  ArrayList<String> list = new ArrayList<String>();
+        		  list.add("Qdoba");
+        		  list.add("Panera");
+        		  list.add("Jimmy Johns");
+        		  list.add("Chipotle");
+        		  o1.setTrainLocations(list);
                   m_trains.add(o1);
         	}
         	
