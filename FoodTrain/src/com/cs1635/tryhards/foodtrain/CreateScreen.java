@@ -5,11 +5,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.TimePickerDialog.OnTimeSetListener;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
@@ -21,16 +28,18 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 public class CreateScreen extends FragmentActivity{
-	EditText nameField;
-	EditText dateField;
-	EditText locationField;
-	TimePicker timeField;
+	TextView nameField;
+	TextView locationField;
 	TextView locationList;
-	
+	Button dateButton;
+	Button contactButton;
+	Button timeButton;
 	private int returnYear;
 	private int returnMonth;
 	private int returnDay;
 	
+	private int returnHour;
+	private int returnMinute;
 	private ArrayList<String> locations;
 
 	private TextView mDateDisplay;
@@ -41,13 +50,13 @@ public class CreateScreen extends FragmentActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.create_layout);
 		
-		nameField = (EditText) findViewById(R.id.nameEditText);
+		nameField = (TextView) findViewById(R.id.nameEditText);
 		//dateField = (EditText) findViewById(R.id.dateEditText);
-		timeField = (TimePicker) findViewById(R.id.timePicker);
-		mDateDisplay = (TextView) findViewById(R.id.myDate);
-		locationField = (EditText) findViewById(R.id.locationEditText);
+		locationField = (TextView) findViewById(R.id.locationEditText);
 		locationList = (TextView) findViewById(R.id.locationsList);
-		
+		dateButton = (Button) findViewById(R.id.myDatePickerButton);
+		timeButton = (Button) findViewById(R.id.Button01);
+		contactButton = (Button) findViewById(R.id.contactButton);
 		//make the listeners for the cancel and click buttons
 		findViewById(R.id.cancelbutton).setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -61,11 +70,29 @@ public class CreateScreen extends FragmentActivity{
 			}
 		});
 		
-		findViewById(R.id.myDatePickerButton).setOnClickListener(new View.OnClickListener() {
+		dateButton.setOnClickListener(new View.OnClickListener() {
 	        public void onClick(View v) {
 	        	showDatePicker();
 	        }
 	    });
+		
+		timeButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				showTimePicker();
+				
+			}
+		});
+		
+		contactButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				showContactPicker();
+				
+			}
+		});
 		
 		findViewById(R.id.addLocationButton).setOnClickListener(new View.OnClickListener() {
 	        public void onClick(View v) {
@@ -97,7 +124,21 @@ public class CreateScreen extends FragmentActivity{
 		// Show the fragment
 		datePicker.show(getSupportFragmentManager(), "Date Picker");
 	}
-
+	
+	private void showTimePicker() {
+		TimePickerFragment timePicker = new TimePickerFragment();
+		// Get current day, month, and year
+		Calendar calender = Calendar.getInstance();
+		Bundle bundle = new Bundle();
+		bundle.putInt("hour", calender.get(Calendar.HOUR_OF_DAY));
+		bundle.putInt("minute", calender.get(Calendar.MINUTE));
+		timePicker.setArguments(bundle);
+		// Set callback
+		timePicker.setCallBack(timeCallback);
+		// Show the fragment
+		timePicker.show(getSupportFragmentManager(), "Time Picker");
+	}
+	
 	OnDateSetListener dateCallback = new OnDateSetListener() {
 		@Override
 		public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -105,7 +146,7 @@ public class CreateScreen extends FragmentActivity{
 			returnDay = dayOfMonth;
 			returnMonth = monthOfYear + 1;
 			
-			mDateDisplay.setText(new StringBuilder().append(returnYear)
+			dateButton.setText(new StringBuilder().append(returnYear)
 					.append("-").append(returnMonth)
 					.append("-").append(returnDay));
 			
@@ -114,6 +155,25 @@ public class CreateScreen extends FragmentActivity{
 		}
 	};
 
+	OnTimeSetListener timeCallback = new OnTimeSetListener() {
+
+		@Override
+		public void onTimeSet(TimePicker arg0, int hourOfDay, int minute) {
+			returnHour = hourOfDay;
+			returnMinute = minute;
+			
+			int formattedHour = (hourOfDay < 12) ? hourOfDay : hourOfDay - 12;
+			formattedHour = (hourOfDay == 0) ? hourOfDay + 12 : hourOfDay;
+			String type = (hourOfDay <= 12) ? "am" : "pm";
+			
+			timeButton.setText(new StringBuilder().append(formattedHour)
+					.append(":").append(minute)
+					.append(" ").append(type));
+		
+		}
+		
+	};
+	
 	
 	public void addLocationClick() {
 		String location = locationField.getText().toString();
@@ -133,9 +193,45 @@ public class CreateScreen extends FragmentActivity{
 			original += ("\n" + location);
 			Log.i("FoodTrain", location);
 			locationList.setText(original);
+			locationField.setText("");
 		}
 		
 	}
+	
+    private void showContactPicker() {
+		List<String> names = new ArrayList<String>();
+	    ContentResolver cr = getContentResolver();
+	    Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null,
+	            null, null, null);
+	    while (cur.moveToNext()) {
+	    	 String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME_PRIMARY));
+		     names.add(name);
+		    }
+		    
+		    cur.close();
+		DemoDialog contactPicker = new DemoDialog();
+		// Get current day, month, and year
+		Bundle bundle = new Bundle();
+		bundle.putStringArrayList("names", (ArrayList<String>) names);
+		contactPicker.setArguments(bundle);
+		contactPicker.contactObserver = new OnContactSetListener(){
+
+			@Override
+			public void onContactSet(List<String> names) {
+				if(names.size() > 0){
+					String builtName = names.get(0);
+					contactButton.setText("Invitees: " + builtName + ", ...");		
+				}
+
+			}
+			
+		};
+		// Set callback
+		// Show the fragment
+		contactPicker.show(getSupportFragmentManager(), "Contact Picker");
+	}
+
+   
 	
 	public void CreateClick()
 	{
@@ -151,8 +247,8 @@ public class CreateScreen extends FragmentActivity{
 			resultIntent.putExtra("YEAR", returnYear);
 			resultIntent.putExtra("MONTH", returnMonth);
 			resultIntent.putExtra("DAY", returnDay);
-			resultIntent.putExtra("HOUR", timeField.getCurrentHour());
-			resultIntent.putExtra("MINUTE", timeField.getCurrentMinute());
+			resultIntent.putExtra("HOUR", returnHour);
+			resultIntent.putExtra("MINUTE", returnMinute);
 			resultIntent.putStringArrayListExtra("LOCATIONS", locations);
 			
 			setResult(Activity.RESULT_OK, resultIntent);
