@@ -3,8 +3,9 @@
     package="com.cs1635.tryhards.foodtrain"
     android:versionCode="1"
     android:versionName="1.0" >
+
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    
+
     <uses-sdk
         android:minSdkVersion="9"
         android:targetSdkVersion="17" />
@@ -41,7 +42,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cs1635.tryhards.foodtrain.TrainScreen" />
         </activity>
-
+        <activity
+            android:name="com.cs1635.tryhards.foodtrain.GroupActivity"
+            android:label="@string/title_activity_group" >
+        </activity>
     </application>
 
 </manifest>

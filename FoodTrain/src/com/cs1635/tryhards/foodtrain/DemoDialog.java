@@ -42,8 +42,8 @@ public class DemoDialog extends DialogFragment {
 	
 	@Override
 	public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		LinearLayout herp = new LinearLayout(getActivity());
-		herp.setOrientation(LinearLayout.VERTICAL);
+		LinearLayout mainLayout = new LinearLayout(getActivity());
+		mainLayout.setOrientation(LinearLayout.VERTICAL);
 		final ListView v = new ListView(getActivity());		
 		final BaseAdapter b = new BaseAdapter() {
 			
@@ -82,14 +82,14 @@ public class DemoDialog extends DialogFragment {
 			}
 			
 		});
-		ViewGroup.LayoutParams fds = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 500);
-		v.setLayoutParams(fds);
+		ViewGroup.LayoutParams layoutOptions = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 500);
+		v.setLayoutParams(layoutOptions);
 		v.setClickable(true);
-		herp.addView(v);
-		Button butt = new Button(getActivity());
-		butt.setText("Done");
-		final DemoDialog heeee = this;
-		butt.setOnClickListener(new OnClickListener(){
+		mainLayout.addView(v);
+		Button doneButton = new Button(getActivity());
+		doneButton.setText("Done");
+		final DemoDialog this_ = this;
+		doneButton.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View arg0) {
@@ -103,12 +103,11 @@ public class DemoDialog extends DialogFragment {
 					}
 					contactObserver.onContactSet(checkedNames);
 				}
-				heeee.dismiss();
+				this_.dismiss();
 			}
 			
 		});
-		butt.setBackgroundColor(Color.WHITE);
-		herp.addView(butt);
-		return herp;
+		mainLayout.addView(doneButton);
+		return mainLayout;
 	}
 }

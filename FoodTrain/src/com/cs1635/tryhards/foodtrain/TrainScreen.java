@@ -120,7 +120,7 @@ public class TrainScreen extends ListActivity {
 		// Need to pull up the groups activity
 		// Intent resultIntent;
 		//Log.i("TrainScreen", "Groups button clicked!");
-		Intent groupintent = new Intent(this, GroupScreen.class);
+		Intent groupintent = new Intent(this, GroupActivity.class);
 		startActivity(groupintent);
 		
 		//Toast.makeText(TrainScreen.this, "You clicked the Groups button!",Toast.LENGTH_SHORT).show();
